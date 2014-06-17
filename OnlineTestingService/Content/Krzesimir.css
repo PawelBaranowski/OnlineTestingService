@@ -1,0 +1,165 @@
+﻿.box
+{
+    position: relative;
+    border-color: black;
+    border-width: 10px;
+    width: 96%;
+    margin-left: 2%;
+
+}
+.infoBox
+{
+    margin-top: 10%;
+    width: 15%;
+    float: left;
+    border-style: groove;
+}
+.center
+{
+    margin-left: 1%;
+    width: 68%;
+    float: left;
+    background-color: White;
+}
+.questionBox
+{
+    width: 100%;
+}
+.answerBox
+{
+    width: 100%;
+}
+.finishBox
+{
+    width: 10%;
+    float: none;
+    margin-left: 90%;
+    padding-top: 18%;
+    padding-bottom: 20%;
+}
+.box2
+{
+    border: black;
+    border-width: 10px;
+}
+.passwordbox
+{
+    position: absolute;
+    border-color: black;
+    border-width: 10px;
+    width: 60%;
+    height: 60%;
+    left: 20%;
+    top: 20%;
+    font-size: larger;
+    color: Black;
+    background-color: Orange;
+    margin-left: 2%;
+    font-weight: bolder;
+
+}
+.passwordbox p
+{
+    
+    left: 4%;
+    top: 40%;
+    font-size: larger;
+    color: Black;
+    font-weight: bolder;
+
+}
+#password
+{
+    display: inline;
+    left: 50%;
+    width: 40%;
+    font-size: larger;
+    color: Black;
+}   
+#startt
+{
+    
+    display: block;
+    float: none;
+    border: black;
+    width: 25%;
+    height: 25%;
+    font-size: larger;
+    background: #ddf;
+    bottom: 4%;
+    right: 4%;
+}
+#commentbox
+{
+    width: 80%;
+    float: left;
+}
+
+.textarea
+{
+    font-weight: 900;
+    border-width: 1px;
+    border-color: Blue;
+    width: 100%;
+    height: 20%;
+    font-size: large;
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 7px;
+}
+
+.box input
+{
+    float: left;
+    border: black;
+    width: 33%;
+    background: #ddf;
+    
+}
+
+.grades
+{
+    float: none;
+    padding-left: 85%;
+    padding-top: 2%;
+}
+
+#prev
+{
+    margin-left: 2%;
+    width: 16%;
+}
+#next
+{
+    margin-left: 64%;
+    width: 16%;
+}
+
+#save
+{
+    float: left;   
+    margin-left: 2%;
+    margin-top: 20%;
+    text-align: center;
+}
+
+#finishReview
+{
+    margin-left: 10%;
+}
+
+.buttons
+{
+    margin-top: 1%;
+    padding-top: 1%;
+}
+
+.buttonsReview
+{
+    clear: both;
+    padding-top: 1%;
+}
+#nextReview
+{
+    margin-left: 50%;
+    width: 16%;
+}

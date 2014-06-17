@@ -1,0 +1,10 @@
+﻿@model OnlineTestingService.BusinessLogic.Entities.File
+
+@if (Model != null)
+{
+    <a href="@Url.Action("Get", "File", new {id = Model.Id})">@Model.Name</a>
+}
+else
+{ 
+    @("<no file uploaded>")
+}

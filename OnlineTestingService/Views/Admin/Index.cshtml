@@ -1,0 +1,58 @@
+﻿@model List<OnlineTestingService.Models.User>
+@{
+    ViewBag.Title = "Admin";
+}
+<h2>
+    Admin</h2>
+@(Html.Telerik().Grid(Model)
+.Name("Users")
+.DataKeys(keys => keys.Add(u => u.UserName).RouteKey("username"))
+.ToolBar(commands => commands.Insert().ButtonType(GridButtonType.ImageAndText))
+.DataBinding(dataBinding => dataBinding.Server()
+    .Select("Select", "Admin")
+    .Insert("Insert", "Admin")
+    .Update("Update", "Admin")
+    .Delete("Delete", "Admin"))
+.Columns(columns =>
+    {
+        columns.Bound(u => u.UserName).ReadOnly(Request.QueryString["Users-mode"] != "insert");
+        columns.Bound(u => u.Email);
+        columns.Bound(u => u.IsAdmin);
+        columns.Bound(u => u.IsCandidateManager);
+        columns.Bound(u => u.IsTestDefiner);
+        columns.Bound(u => u.IsTestReviewer);
+        columns.Command(commands =>
+            {
+                commands.Edit().ButtonType(GridButtonType.ImageAndText);
+                commands.Delete().ButtonType(GridButtonType.ImageAndText);
+            });
+    })
+    .Scrollable(scrolling => scrolling.Enabled(false))
+    .Sortable(sorting => sorting.Enabled(true))
+    .Pageable(paging => paging.Enabled(true))
+    .Filterable(filtering => filtering.Enabled(true))
+    .Footer(true)
+    )
+@using (Html.BeginForm("TimeSelected", "Admin", FormMethod.Post))
+{
+    @(Html.Label("Set frequency of notifications: "))
+    @(Html.Telerik().DropDownList()
+    .Name("TimesList")
+    .Items(items =>
+        {
+            int[] delays = new int[] { 1, 3, 6, 12, 24};
+            foreach (int delay in delays)
+            {
+                int value = delay * 3600 * 1000;
+                var item = items.Add().Text("" + delay + " hours").Value("" + value);
+                if (OnlineTestingService.Settings.NotificationDelay == value)
+                    item.Selected(true);
+            }
+        })
+        .Enable(true)
+        .AssetKey("TimesList")
+        )
+    @Html.CustomUpdateButton("submit", "Set time")
+}
+
+@Html.SetGridInsertButtonText("Users", "New user...")

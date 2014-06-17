@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <_NotificationDelay>3600000</_NotificationDelay>
+  <_CandidateNotificationSubject>Hello candidate!</_CandidateNotificationSubject>
+  <_CandidateNotificationTemplate>Hello $CandidateName$!\nA new test is available for you!\n\nIt is available under the following url:\n$TestUrl$\nThe password is:\n$Password$\n\nHave a nice day!\nOnline testing service.</_CandidateNotificationTemplate>
+  <_EmployeeNotificationSubject>Hello employee!</_EmployeeNotificationSubject>
+  <_EmployeeNotificationTemplate>Hello!\nA test taken by candidate $CandidateName$ has been finished!\n\nHave a nice day!\nOnline testing service.</_EmployeeNotificationTemplate>
+  <_SendEmailFromAddress>online-testing-service@o2.pl</_SendEmailFromAddress>
+  <_UrlPrefix>localhost:3196</_UrlPrefix>
+</Settings>

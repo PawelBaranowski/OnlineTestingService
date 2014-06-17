@@ -1,0 +1,66 @@
+﻿@model QuestionContent
+@{
+    ViewBag.Title = "Question details";
+}
+<h2>
+    Details of question.</h2>
+<p>
+    Question content:</p>
+@(Html.Telerik().Grid(new List<QuestionContent> { Model })
+.Name("Questions")
+.DataKeys(keys => keys.Add(q => q.Id).RouteKey("Id"))
+        .DataBinding(dataBinding => dataBinding.Server()
+        .Update("UpdateSingleQuestion", "Questions")
+        .Delete("DeleteQuestion", "Questions"))
+.Columns(columns =>
+    {
+        columns.Bound(q => q.Content).Width("50%");
+        columns.Bound(q => q.Time).Width("8%");
+        columns.Bound(q => q.Mandatory).Width("8%");
+        columns.Bound(q => q.NamesOfGroups).Width("14%");
+        columns.Command(commands =>
+            {
+                commands.Edit().ButtonType(GridButtonType.ImageAndText);
+                commands.Delete().ButtonType(GridButtonType.ImageAndText);
+            }).Width("20%");
+    })
+    .Scrollable(scrolling => scrolling.Enabled(false))
+         .Sortable(sorting => sorting.Enabled(false))
+         .Pageable(paging => paging.Enabled(false))
+         .Filterable(filtering => filtering.Enabled(false))
+         .Footer(false)
+    )
+<p>
+    Question is in groups:</p>
+@(Html.Telerik().Grid<QuestionGroup>(Model.InGroups)
+    .Name("inGroups")
+    .DataKeys(keys => keys.Add(g => g.Id).RouteKey("groupId"))
+    .DataBinding(binding => binding.Server()
+        .Delete("DeleteFromGroup", "Questions")
+    )
+    .Columns(columns =>
+    {
+        columns.Bound(group => group.Name);
+        columns.Command(commands =>
+        {
+            commands.Delete().ButtonType(GridButtonType.ImageAndText);
+        }
+        );
+    }
+        )
+        )
+@using (Html.BeginForm("AddToGroup", "Questions", new { id = (int?)ViewData["id"] }, FormMethod.Get))
+{
+
+    @(Html.Telerik().DropDownList()
+        .Name("groupToAddId")
+        .Items(items =>            
+        {
+            foreach (QuestionGroup item in (IEnumerable<QuestionGroup>)ViewData["groupsToAdd"])
+            {
+                items.Add().Text(item.Name).Value(item.Id.ToString());
+            }
+    }
+    ))
+    @Html.CustomAddButton("submit", "Add")
+}

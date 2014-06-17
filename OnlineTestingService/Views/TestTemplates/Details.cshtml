@@ -1,0 +1,103 @@
+﻿@model OnlineTestingService.BusinessLogic.Entities.TestTemplate
+
+@{
+    IList<TestTemplate> list = new List<TestTemplate>();
+    list.Add(Model);
+    ViewBag.Title = "'" + Model.Name + "' - test template details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>Job offer file:</p>
+@(Html.Telerik().Grid<TestTemplate>(list)
+    .Name("JobOfferFile")
+    .DataKeys(keys => keys.Add(templ => templ.Id).RouteKey("Id"))
+    .DataBinding(binding => binding.Server()
+        .Update("UpdateJobOffer", "TestTemplates")
+    )
+    .Columns(columns =>
+        {
+            columns.Bound(templ => templ.JobOffer);
+            columns.Command(commands =>
+            {
+                commands.Edit().ButtonType(GridButtonType.ImageAndText);
+            }
+            );
+        }
+    )
+)
+
+<p>E-mails to notify:</p>
+@(Html.Telerik().Grid<EmailAddress>(Model.PeopleToNotify)
+    .Name("PeopleToNotify")
+    .DataKeys(keys => keys.Add(item => item.Address).RouteKey("Address"))
+    .DataBinding(binding => binding.Server()
+        .Insert("AddEmail", "TestTemplates")
+        .Update("UpdateEmail", "TestTemplates")
+        .Delete("DeleteEmail", "TestTemplates")
+    )
+    .ToolBar(commands =>
+        {
+            commands.Insert().ButtonType(GridButtonType.ImageAndText);
+        }
+    )
+    .Columns(columns =>
+        {
+            columns.Bound(item => item.Address).Width(200);
+            columns.Command(commands =>
+                {
+                    commands.Edit().ButtonType(GridButtonType.ImageAndText);
+                    commands.Delete().ButtonType(GridButtonType.ImageAndText);
+                }    
+            ).Width(200);
+        }
+    )
+)
+
+<p>Question groups:</p>
+
+@(Html.Telerik().Grid<GroupAndNumber>(Model.GroupsAndNumbers)
+    .Name("GroupsAndNumbers")
+    .DataKeys(keys =>
+        {
+            keys.Add(item => item.Group.Id).RouteKey("GroupId");
+        }
+    )
+    .DataBinding(binding => binding.Server()
+        .Update("UpdateGroup", "TestTemplates")
+        .Delete("DeleteGroup", "TestTemplates")
+    )
+    .Columns(columns =>
+        {
+            columns.Bound(item => item.Group.Name).ReadOnly(true);
+            columns.Bound(item => item);
+            columns.Command(commands =>
+                {
+                    commands.Edit().ButtonType(GridButtonType.ImageAndText);
+                    commands.Delete().ButtonType(GridButtonType.ImageAndText);
+                }    
+            ).Width(200);
+        }
+    )    
+)
+
+<p>Add a question group:</p>
+
+@using(Html.BeginForm("AddGroup", "TestTemplates", new { id = (int?)ViewData["id"] }, FormMethod.Get))
+{
+
+@(Html.Telerik().DropDownList()
+    .Name("groupToAddId")
+    .Items(items =>
+        {
+            foreach (QuestionGroup item in (IEnumerable<QuestionGroup>)ViewData["groupsToAdd"])
+            {
+                items.Add().Text(item.Name).Value(item.Id.ToString());
+            }
+        }
+    )
+)
+ @Html.CustomAddButton("submit", "Add")
+}
+
+@Html.SetGridInsertButtonText("PeopleToNotify", "New e-mail address...")

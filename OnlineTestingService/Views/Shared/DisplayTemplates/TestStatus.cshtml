@@ -1,0 +1,22 @@
+﻿@model Test.TestStatus
+
+@{
+    String className = "test-status-";
+    String statusText = "";
+    switch (Model) {
+        case Test.TestStatus.NOT_FINISHED:
+            className += "not-finished";
+            statusText += "Not finished";
+            break;
+        case Test.TestStatus.NOT_REVIEWED:
+            className += "not-reviewed";
+            statusText += "Not reviewed";
+            break;
+        case Test.TestStatus.REVIEWED:
+            className += "reviewed";
+            statusText += "Reviewed";
+            break;
+    }
+}
+
+<span id="test-status" class="@(className)">@(statusText)</span>

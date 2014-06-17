@@ -1,0 +1,26 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "Layout.cshtml";
+}
+
+@if (ViewData["errorMessage"] != null)
+{
+<div class="test-page-error">
+@ViewData["errorMessage"]
+</div>
+}
+else
+{
+<b>Please enter password:</b>
+}
+
+    <div>
+        @using (Html.BeginForm("Login", "Test_", FormMethod.Post))
+        {
+            <input type="hidden" name="guid" value="@Model" />
+            <input type="password" name="password" />
+            <input type="submit" value="Log in" class="t-button"/>
+        }
+    </div>

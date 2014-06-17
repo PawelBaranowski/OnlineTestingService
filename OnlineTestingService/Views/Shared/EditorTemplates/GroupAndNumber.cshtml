@@ -1,0 +1,7 @@
+@model GroupAndNumber
+
+@(Html.Telerik().IntegerTextBoxFor(m => m.Number)
+      .InputHtmlAttributes(new { style = "width:100%" })
+      .MinValue(0)
+      .MaxValue(Model.Group.QuestionContents.Count)
+)

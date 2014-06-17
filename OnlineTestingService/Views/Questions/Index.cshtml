@@ -1,0 +1,75 @@
+﻿@model List<QuestionContent>
+@{
+    ViewBag.Title = "Questions";
+}
+<h2>@ViewBag.Title</h2>
+<div>
+    <p>
+        Questions:</p>
+    @(Html.Telerik().Grid(Model)
+.Name("Questions")
+.DataKeys(keys => keys.Add(q => q.Id).RouteKey("Id"))
+        .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.ImageAndText))
+.DataBinding(dataBinding => dataBinding.Server()
+        .Select("SelectQuestion", "Questions")
+        .Insert("InsertQuestion", "Questions")
+        .Update("UpdateQuestion", "Questions")
+        .Delete("DeleteQuestion", "Questions"))
+.Columns(columns =>
+    {
+        columns.Bound(q => q.Content).Width("50%").Template(
+            c => {
+                if (c.Content.Length > 100) return c.Content.Substring(0, 75) + " (...)";
+                else return c.Content;
+                });
+        columns.Bound(q => q.Time).Width("8%");
+        columns.Bound(q => q.Mandatory).Width("8%");
+        columns.Bound(q => q.NamesOfGroups).Width("14%");
+        columns.Command(commands =>
+            {
+                commands.Edit().ButtonType(GridButtonType.Image);
+                commands.Custom("details")
+                        .Text("Details")
+                        .Action("Details", "Questions")
+                        .ImageHtmlAttributes(DetailsImage._)
+                        .ButtonType(GridButtonType.Image);
+                commands.Delete().ButtonType(GridButtonType.Image);
+            }).Width("20%");
+    })
+    .Scrollable(scrolling => scrolling.Enabled(false))
+    .Sortable(sorting => sorting.Enabled(true))
+    .Pageable(paging => paging.Enabled(true))
+    .Filterable(filtering => filtering.Enabled(true))
+    .Footer(true)
+    )
+</div>
+<div>
+    <p>
+        All question groups:</p>
+    @(Html.Telerik().Grid((IEnumerable<QuestionGroup>)ViewData["questionGroups"])
+        .Name("QuestionsGroup")
+        .DataKeys(keys => keys.Add(g => g.Id).RouteKey("GroupId"))
+        .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.ImageAndText))
+        .DataBinding(dataBinding => dataBinding.Server()
+            .Select("SelectGroup", "Questions")
+            .Insert("InsertGroup", "Questions")
+            .Update("UpdateGroup", "Questions"))
+
+        .Columns(columns =>
+        {
+            columns.Bound(g => g.Name);
+            columns.Command(commands =>
+            {
+                commands.Edit().ButtonType(GridButtonType.ImageAndText);
+            });
+        })
+        .Scrollable(scrolling => scrolling.Enabled(false))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Enabled(true))
+        .Footer(true)
+)
+</div>
+
+@Html.SetGridInsertButtonText("Questions", "New question..")
+@Html.SetGridInsertButtonText("QuestionsGroup", "New question group...")

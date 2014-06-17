@@ -1,0 +1,117 @@
+﻿@model Question
+@{
+    string testName = (string)ViewData["testName"];
+    int questionNumber = (int)@ViewData["questionNumber"];
+    string number_of_questions = @ViewData["totalQuestion"].ToString();
+    string questionContent = Model.QuestionContent.Content;
+    string here_answer = Model.Answer.Content;
+    int time = (int)ViewData["time"];
+
+    ViewBag.Title = testName + " :: Question " + (questionNumber+1) + "/" + number_of_questions;
+    Layout = null;
+}
+@Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("~/Content/test.css"))
+<script type="text/javascript" src="@(Url.Content("~/Scripts/Timer.js"))"></script>
+@using (Html.BeginForm("SaveButton", "Test_", new { id = ViewData["guid"], questionNumber = questionNumber }, FormMethod.Post))
+{
+    <input type="hidden" name="nextQuestion" id="nextQuestion" value="@questionNumber" />
+    <input type="hidden" name="finishTest" id="finishTest" value="false" />
+    <table>
+        <caption>
+            @testName :: Question @(questionNumber + 1) / @number_of_questions
+            <div class="subcaption">
+                Category: '@(Model.QuestionContent.NamesOfGroups)' | Estimated time: @(Model.QuestionContent.Time)
+                min</div>
+        </caption>
+        <colgroup>
+            <col class="left" />
+            <col class="middle" />
+            <col class="right" />
+        </colgroup>
+        <tr>
+            <td rowspan="3" class="sidecell">
+                <div class="header">
+                    Instructions</div>
+                <div id="leftcell">
+                    <ul>
+                        <li>Click <b>Next</b> and <b>Previous</b> buttons to shift to another question.</li>
+                        <li>Your answers are automatically saved as you change questions.</li>
+                        <li>If the time expires the current answer will be automatically saved.</li>
+                    </ul>
+                </div>
+            </td>
+            <td class="questioncell">
+                @Html.TextArea("questionContent", questionContent, new { id = "questionContent", @class = "textbox", @readonly = true })
+            </td>
+            <td rowspan="2" class="sidecell">
+                <div class="header">
+                    Time left</div>
+                <div id="rightcell">
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <div id="timer">
+                    </div>
+                    <br />
+                    <br />
+                    You can finish test instantly by clicking <b>Finish</b> button below.
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="answercell">
+                Input your answer below:
+                @Html.TextArea("answer", Model.Answer.Content, new { @class = "textbox" })
+            </td>
+        </tr>
+        <tr class="bottomrow">
+            <td>
+                <input type="submit" id="prev" value="<< Prev" onclick="document.getElementById('nextQuestion').value = '@(questionNumber - 1)'" />
+                <input type="submit" id="next" value="Next >>" onclick="document.getElementById('nextQuestion').value = '@(questionNumber + 1)'" />
+            </td>
+            <td>
+                <input type="submit" id="finish" value="Finish" onclick="document.getElementById('finishTest').value = 'true'" />
+            </td>
+        </tr>
+    </table>
+    
+@*<div style="background-color: White;">
+        <div class="infoBox">
+            <p><b>Note:</b></p>
+            <ul>
+                <li>Click the 'Finish' button given in the bottom of this page to Submit your answers.</li>
+                <li>Test will be submitted automatically if the time expired.</li>
+            </ul>
+        </div>
+        <div class="center">
+            <div class="questionBox" id="questionBox">
+                <p>Question:</p>
+                @Html.TextArea("questionContent", questionContent, new { id = "questionContent", @class = "questionBox", @readonly = true })
+            </div>
+            <div class="answerBox" id="answerBox">
+                <p>Answer:</p>
+                @Html.TextArea("answer", Model.Answer.Content, new { @class = "questionBox" })
+    <input type="submit" class="t-button" id="save" value="Save answer" />
+    <input type="hidden" name="nextQuestion" id="nextQuestion" value="@questionNumber" />
+    <input type="hidden" name="finishTest" id="finishTest" value="false" />
+    </div>
+    <div class="buttons">
+        <input type="submit" class="t-button" id="prev" value="<< Prev" onclick="document.getElementById('nextQuestion').value = '@(questionNumber - 1)'" />
+        <input type="submit" class="t-button" id="next" value="Next >>" onclick="document.getElementById('nextQuestion').value = '@(questionNumber + 1)'" />
+    </div>
+    </div>
+    <div class="finishBox">
+        <p>
+            Remaining time:</p>
+        <div id="timer">
+            <script type="text/javascript">CreateTimer("timer", @time);</script>
+        </div>
+        <input type="submit" class="t-button" id="finish" value="Finish" onclick="document.getElementById('finishTest').value = 'true'" />
+    </div>
+</div>*@
+}
+<script type="text/javascript">
+    document.title = '@(ViewBag.Title)';
+    CreateTimer("timer", @(time));
+</script>

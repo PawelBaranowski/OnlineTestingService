@@ -1,0 +1,79 @@
+﻿@model Candidate
+@{
+    ViewBag.Title = "Details";
+}
+<h2>
+    Details of @Model.Name</h2>
+@(Html.Telerik().Grid(new List<Candidate> { Model })
+    .Name("singleCandidate")
+    .DataKeys(keys => keys.Add(c => c.Id).RouteKey("candidateId"))
+                .DataBinding(dataBinding => dataBinding.Server()
+                            .Select("SelectSingleCandidate", "Candidates")
+                            .Update("UpdateSingleCandidate", "Candidates"))
+                    .Columns(columns =>
+                    {
+                        columns.Bound(t => t.Name);
+                        columns.Bound(t => t.EmailAddress);
+                        columns.Bound(t => t.PhoneNumber);
+                        columns.Bound(t => t.CV);
+                        columns.Bound(t => t.Inactive);
+                        columns.Command(commands =>
+                        {
+                            commands.Edit().ButtonType(GridButtonType.ImageAndText);
+                        });
+                    })
+                    .Scrollable(scrolling => scrolling.Enabled(false))
+                    .Sortable(sorting => sorting.Enabled(false))
+                    .Pageable(paging => paging.Enabled(false))
+                    .Filterable(filtering => filtering.Enabled(false))
+                    .Footer(false)
+    )
+<p>
+    Tests of candidate:</p>
+@(Html.Telerik().Grid((IEnumerable<Test>)ViewData["tests"])
+    .Name("assignedTests")
+    .DataKeys(keys => keys.Add(t => t.Guid).RouteKey("testId"))
+    .DataBinding(binding => binding.Server()
+    )
+    .Columns(columns =>
+    {
+        columns.Bound(test => test.TestTemplate.Name);
+        columns.Bound("Status");
+        columns.Bound(t => t.Grade).Template(
+           c =>
+           {
+               if (c.Grade == -1) { return "Not reviewed"; }
+               else return c.Grade;
+           });
+        columns.Bound(t => t.IsFinished).Template(
+                        c =>
+                        {
+                            if (c.IsFinished)
+                            {
+                                return "<a href=\"" + @Url.Action("Review", "Tests", new { id = c.Guid }) + "\" class=\"t-button\">Review test</a>";
+                            }
+                            else return "";
+                        }
+                    ).Title("");
+    }
+        )
+        )
+<p>
+    Add another test for this user</p>
+@using (Html.BeginForm("AssingToTemplate", "Candidates", new { id = (int?)ViewData["id"] }, FormMethod.Get))
+{
+
+    @(Html.Telerik().DropDownList()
+    .Name("templatesToChoseId")
+    .Items(items =>
+    {
+        foreach (TestTemplate item in (IEnumerable<TestTemplate>)ViewData["testTemplates"])
+        {
+            items.Add().Text(item.Name).Value(item.Id.ToString());
+        }
+    }
+    )
+    )
+    //<input type="hidden" id="templateId" value="" />
+    @Html.CustomAddButton("submit", "Add")
+}

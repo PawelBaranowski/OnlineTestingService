@@ -1,0 +1,40 @@
+﻿@model List<Test>
+@{
+    ViewBag.Title = "Tests";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>@ViewBag.Title</h2>
+@(Html.Telerik().Grid(Model)
+.Name("Tests")
+.DataKeys(keys => keys.Add(t => t.Guid).RouteKey("Id"))
+.DataBinding(dataBinding => dataBinding.Server()
+            .Select("Select", "Tests"))
+            .Columns(columns =>
+                {
+                    columns.Bound(t => t.CandidateName);
+                    columns.Bound(t => t.TestTemplate.JobOffer);
+                    columns.Bound("Status");
+                    columns.Bound(t => t.Grade).Template( 
+                       c => {
+                           if (c.Grade == -1) { return "Not reviewed"; }
+                           else return c.Grade;
+                       });
+                    columns.Bound(t => t.IsFinished).Template(
+                        c =>
+                        {
+                            if (c.IsFinished)
+                            {
+                                return Html.CustomReviewButton(@Url.Action("Review", "Tests", new { id = c.Guid }), "Review test");
+                            } else return "";
+                        }
+                    ).Title("")
+                    .Sortable(false)
+                    .Filterable(false);
+                    
+                })
+        .Scrollable(scrolling => scrolling.Enabled(true))
+        .Sortable(sorting => sorting.Enabled(true))
+        .Pageable(paging => paging.Enabled(true))
+        .Filterable(filtering => filtering.Enabled(true))
+        .Footer(true)
+)

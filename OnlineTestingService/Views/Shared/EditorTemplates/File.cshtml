@@ -1,0 +1,17 @@
+﻿@model OnlineTestingService.BusinessLogic.Entities.File
+
+@if (Model != null)
+{
+    <a class="t-button t-button-icontext t-upload-action"
+    onclick="document.getElementById('removeOldFile').value = 'true'; this.parentElement.removeChild(this);">
+        <span class="t-icon t-delete"></span>
+        Remove old file
+    </a>
+    <input type="hidden" id="removeOldFile" name="removeOldFile" value="false" />
+}
+
+@(
+    Html.Telerik().Upload()
+        .Name("file")
+        .Multiple(false)
+)

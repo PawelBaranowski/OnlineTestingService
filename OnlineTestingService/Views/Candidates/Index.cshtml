@@ -1,0 +1,41 @@
+﻿@model List<Candidate>
+@{
+    ViewBag.Title = "Candidates";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+    Candidates</h2>
+@(Html.Telerik().Grid(Model)
+.Name("Candidates")
+.DataKeys(keys => keys.Add(t => t.Id).RouteKey("Id"))
+    .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.ImageAndText))
+        .DataBinding(dataBinding => dataBinding.Server()
+                    .Select("SelectCandidate", "Candidates")
+                    .Insert("InsertCandidate", "Candidates")
+                    .Update("UpdateCandidate", "Candidates"))
+            .Columns(columns =>
+                {
+                    columns.Bound(t => t.Name);
+                    columns.Bound(t => t.EmailAddress);
+                    columns.Bound(t => t.PhoneNumber);
+                    columns.Bound(t => t.CV);
+                    columns.Bound(t => t.Inactive);
+                    columns.Command(commands =>
+                    {
+                        commands.Edit().ButtonType(GridButtonType.ImageAndText);
+                        commands.Custom("details")
+                        .Text("Details")
+                        .Action("Details", "Candidates")
+                        .ImageHtmlAttributes(DetailsImage._)
+                        .ButtonType(GridButtonType.ImageAndText);
+                    });
+                })
+            .Scrollable(scrolling => scrolling.Enabled(true))
+            .Sortable(sorting => sorting.Enabled(true))
+            .Pageable(paging => paging.Enabled(true))
+            .Filterable(filtering => filtering.Enabled(true))
+            .Footer(true)
+)
+
+@Html.SetGridInsertButtonText("Candidates", "New candidate...")

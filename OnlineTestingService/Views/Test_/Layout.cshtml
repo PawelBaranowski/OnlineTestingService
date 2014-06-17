@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Krzesimir.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Bartek.css")" rel="stylesheet" type="text/css" />
+    @(Html.Telerik().StyleSheetRegistrar().DefaultGroup(group => group.Add("telerik.common.css").Add("telerik.black.css").Combined(true).Compress(true)))
+</head>
+<body>
+    <div class="page">
+        <header>
+            <div id="title">
+                <h1>Online Testing Service</h1>
+            </div>
+        </header>
+        <section id="main">
+            @RenderBody()
+        </section>
+        <footer>
+        </footer>
+    </div>
+    @Html.Telerik().ScriptRegistrar()
+    </body>
+</html>

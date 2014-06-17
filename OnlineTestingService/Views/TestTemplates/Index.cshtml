@@ -1,0 +1,46 @@
+﻿@model IEnumerable<OnlineTestingService.BusinessLogic.Entities.TestTemplate>
+
+@{
+    ViewBag.Title = "Test templates";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@(Html.Telerik().Grid<TestTemplate>(Model)
+    .Name("TestTemplates")
+    .DataKeys(keys => keys.Add(item => item.Id).RouteKey("Id"))
+    .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.ImageAndText))
+    .DataBinding(binding => binding.Server()
+        .Insert("AddTemplate", "TestTemplates")
+        .Select("SelectTemplate", "TestTemplates")
+        .Delete("DeleteTemplate", "TestTemplates")
+        .Update("Details", "TestTemplates")
+    )
+    .Columns(columns =>
+    {
+        columns.Bound(item => item.Name);
+        columns.Bound(item => item.JobOffer).Title("Job offer file");
+        columns.Bound(item => item.NumberOfQuestions).Title("Number of questions");
+        columns.Command(commands =>
+        {
+            commands.Edit().ButtonType(GridButtonType.ImageAndText);
+            commands.Custom("details")
+                        .Text("Details")
+                        .Action("Details", "TestTemplates")
+                        .ImageHtmlAttributes(DetailsImage._)
+                        .ButtonType(GridButtonType.ImageAndText);
+            commands.Delete().ButtonType(GridButtonType.ImageAndText);
+        }
+        );
+    })
+    .Filterable(filtering => filtering.Enabled(true))
+    .Sortable(sorting => sorting.Enabled(true))
+)
+
+@Html.SetGridInsertButtonText("TestTemplates", "New template...")
+
+@*Hide standard edit buttons*@
+<script type="text/javascript">
+    editBtns = document.getElementsByClassName('t-grid-edit');
+    for (i = 0; i < editBtns.length; i++) editBtns[i].style.display = 'none';
+</script>

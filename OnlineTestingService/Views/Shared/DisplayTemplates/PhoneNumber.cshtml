@@ -1,0 +1,6 @@
+﻿@model PhoneNumber
+
+@if (Model != null)
+{
+    <a href="callto:@(Model.Number)">@Model.Number</a>
+}

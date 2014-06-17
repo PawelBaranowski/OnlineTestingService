@@ -1,0 +1,64 @@
+﻿@model Question
+@{ViewBag.Title = "Test review : Test ";}
+@{
+    int questionNumber = (int)@ViewData["questionNumber"];
+    int totalQuestions = (int)@ViewData["totalQuestion"];
+    string candidateName = (string)@ViewData["candidateName"];
+    string jobOfferName = (string)@ViewData["jobOfferName"];
+}
+<div>
+    <h2>Candidate: @candidateName</h2>
+    <h2>Job offer: @jobOfferName</h2>
+    <h3>@(questionNumber+1) / @totalQuestions</h3>
+    <div class="box">
+        <p>
+            Question: [Category: @Model.QuestionContent.NamesOfGroups]</p>
+        @Html.TextArea("question", Model.QuestionContent.Content,
+                    new { id = "question", @class = "textarea", @readonly = true })
+    </div>
+    <div class="box">
+        <p>
+            Answer:</p>
+        @Html.TextArea("answer", Model.Answer.Content,
+                    new { id = "answer", @class = "textarea", @readonly = true })
+    </div>
+    @using (Html.BeginForm("SaveCommentGrade", "Tests", new { id = ViewData["guid"], questionNumber = questionNumber }, FormMethod.Post))
+    {
+        <div class="box" id="commentbox">
+            <p>
+                Comment:</p>
+                @(Html.TextAreaFor(q => q.Answer.Comment))
+                <script type="text/javascript">
+                    document.getElementById('Answer_Comment').name = 'comment';
+</script>
+            @*@(Html.Telerik().EditorFor(q => q.Answer.Comment).Tools(tool => tool.Clear()).Name("comment"))*@
+        </div>
+        <div class="grades">
+            <p>
+                Grade:</p>
+            @(Html.Telerik().DropDownList()
+                .Name("grades")
+                .HtmlAttributes(new { style = "width: 20%; float: left" })
+                .Items(items =>
+                    {
+                        items.Add().Text("-").Value(null);
+                        for (int i = 1; i <= 6; i++)
+                        {
+                            items.Add().Text(i.ToString()).Value(i.ToString());
+                        }
+                    })
+                    .Value(Model.Answer.Grade.ToString())
+         )
+            @*<input type="submit" class="t-button" id="save" value="Save comment and grade" />*@
+            <input type="hidden" name="nextQuestion" id="nextQuestion" value="@questionNumber" />
+            <input type="hidden" name="isFinish" id="isFinish" value="false" />
+        </div>
+
+        <div class="buttonsReview">
+            <input type="submit" class="t-button" id="prev" value="<< Prev" onclick="document.getElementById('nextQuestion').value = '@(questionNumber - 1)'" />
+            <input type="submit" class="t-button" id="nextReview" value="Next >>" onclick="document.getElementById('nextQuestion').value = '@(questionNumber + 1)'" />
+            <input type="submit" class="t-button" name="finishReview" id="finishReview" value="Finish"
+                onclick="document.getElementById('isFinish').value = true" />
+        </div>
+    }
+</div>

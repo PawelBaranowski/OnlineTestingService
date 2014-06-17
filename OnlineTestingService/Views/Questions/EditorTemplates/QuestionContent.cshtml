@@ -1,0 +1,11 @@
+﻿@model string
+
+@Html.TextArea("Content", Model)
+
+<script type="text/javascript">
+    document.getElementById('Content_Content').name = 'Content';
+</script>
+
+@*@(Html.Telerik().EditorFor(m => m)
+.Tools(tool => tool.Clear())
+)*@

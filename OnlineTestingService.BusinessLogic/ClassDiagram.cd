@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="OnlineTestingService.BusinessLogic.Entities.Question">
+    <Position X="7.25" Y="20" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAgAAAAI=</HashCode>
+      <FileName>Entities\Question.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="QuestionContent" />
+      <Property Name="Answer" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="OnlineTestingService.BusinessLogic.Entities.File">
+    <Position X="6.25" Y="9.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAgAAAAAAgAAAAAQAAAAEAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\File.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OnlineTestingService.BusinessLogic.Entities.Candidate">
+    <Position X="7.5" Y="5.5" Width="6.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAgAAAQAQAAAAAAIAAIAAAAgAAAAA=</HashCode>
+      <FileName>Entities\Candidate.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="CV" />
+      <Property Name="EmailAddress" />
+      <Property Name="PhoneNumber" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OnlineTestingService.BusinessLogic.Entities.TestTemplate">
+    <Position X="0.5" Y="4" Width="5.25" />
+    <TypeIdentifier>
+      <HashCode>AAgABAAAACgAACAAgAAAQAQAAAAAAYAAAAAAABAQAAg=</HashCode>
+      <FileName>Entities\TestTemplate.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="JobOffer" />
+    </ShowAsAssociation>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="OnlineTestingService.BusinessLogic.Entities.Answer">
+    <Position X="7.75" Y="22.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQCAAAEAgAAAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAA=</HashCode>
+      <FileName>Entities\Answer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineTestingService.BusinessLogic.TestGenerator">
+    <Position X="16.75" Y="2" Width="4" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TestGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineTestingService.BusinessLogic.GUIDGenerator">
+    <Position X="16.75" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>GUIDGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineTestingService.BusinessLogic.PasswordGenerator">
+    <Position X="23.25" Y="4.25" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>gAAgAAAAAAAEEAARAABAAAAAAAAAAAAQAAAABEAAAAA=</HashCode>
+      <FileName>PasswordGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineTestingService.BusinessLogic.Notification">
+    <Position X="21.75" Y="0.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQABAACCAAAAAABAAAACQAAIAAAAAQA=</HashCode>
+      <FileName>Notification.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineTestingService.BusinessLogic.Mailer">
+    <Position X="16.5" Y="4.25" Width="6" />
+    <TypeIdentifier>
+      <HashCode>AAAYgABAAAiAAAABIBACAABAgABAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Mailer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineTestingService.BusinessLogic.Entities.QuestionContent" BaseTypeListCollapsed="true">
+    <Position X="7" Y="15" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAACgAAAAoAABAAAgAQAIAAAAAAAAIAAABABAAAAgQA=</HashCode>
+      <FileName>Entities\QuestionContent.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OnlineTestingService.BusinessLogic.Entities.QuestionGroup" BaseTypeListCollapsed="true">
+    <Position X="1.5" Y="15.5" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACEgAACAAwAAAAIAIAAAEAAAAAAAAA=</HashCode>
+      <FileName>Entities\QuestionGroup.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="QuestionContents" />
+    </ShowAsCollectionAssociation>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="OnlineTestingService.BusinessLogic.Entities.Test">
+    <Position X="7" Y="0.5" Width="6.5" />
+    <TypeIdentifier>
+      <HashCode>AACgAAAAACACAAACAAAAEAAAIAQhAAAEBAAAAgEAAAg=</HashCode>
+      <FileName>Entities\Test.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="TestTemplate" />
+      <Property Name="Candidate" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="OnlineTestingService.BusinessLogic.Entities.EmailAddress">
+    <Position X="12.5" Y="9.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAgAAAAAAAAAIAAIACAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\EmailAddress.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OnlineTestingService.BusinessLogic.Entities.PhoneNumber">
+    <Position X="9" Y="9.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAQAAAgEAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\PhoneNumber.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

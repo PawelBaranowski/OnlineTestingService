@@ -1,0 +1,11 @@
+﻿.questionsGrid
+{
+    width: 59%;
+    float: left;
+}
+
+.groupsGrid
+{
+    width: 29%;
+    margin-left: 60%;
+}
