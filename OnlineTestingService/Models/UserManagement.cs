@@ -236,6 +236,7 @@ namespace OnlineTestingService.Models
             roleProvider.CreateRole(User.CANDIDATE_MANAGER);
             roleProvider.CreateRole(User.TEST_DEFINER);
             roleProvider.CreateRole(User.TEST_REVIEWER);
+            roleProvider.CreateRole(User.CANDIDATE);
         }
     }
 }

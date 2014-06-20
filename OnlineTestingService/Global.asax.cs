@@ -64,50 +64,8 @@ namespace OnlineTestingService
             mailer.UrlPrefix = Settings.UrlPrefix;
             MailerDaemon.Start();
 
-            string connectionString =
-                System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ApplicationServices"].ToString();
-            SqlConnection connection = new SqlConnection(connectionString);
-            try
-            {
-                
-                connection.Open();
-                connection.Close();
-                Database.Setup(connectionString);
-            }
-            catch (SqlException e)
-            {
-                //Some time-out is needed here
-                //Probably the 'connection' object doesn't get disposed on time
-                connection.Dispose();
-                Thread.Sleep(1000);
-
-                Models.UserManagement userMngmnt = Models.UserManagement.GetInstance();
-                System.Web.Security.MembershipCreateStatus status = new System.Web.Security.MembershipCreateStatus();
-                userMngmnt.Setup();
-                Models.User user;
-
-                user = new Models.User(
-                    "admin", "online-testing-service@o2.pl", "admin", new string[] {}, System.Guid.NewGuid());
-                user.IsAdmin = true;
-                userMngmnt.AddUser(user, out status);
-
-                user = new Models.User(
-                    "candidateM", "online-testing-service@o2.pl", "candidateM", new string[] {}, System.Guid.NewGuid());
-                user.IsCandidateManager = true;
-                userMngmnt.AddUser(user, out status);
-
-                user = new Models.User(
-                    "testD", "online-testing-service@o2.pl", "testD", new string[] {}, System.Guid.NewGuid());
-                user.IsTestDefiner = true;
-                userMngmnt.AddUser(user, out status);
-
-                user = new Models.User(
-                    "testR", "online-testing-service@o2.pl", "testR", new string[] {}, System.Guid.NewGuid());
-                user.IsTestReviewer = true;
-                userMngmnt.AddUser(user, out status);
-                
-                Database.Setup(connectionString, true, true);
-            }
+            string connectionString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ApplicationServices"].ToString();
+            Database.Setup(connectionString);
         }
     }
 }

@@ -234,8 +234,8 @@ namespace OnlineTestingService.BusinessLogic
                       .Database(
                         MsSqlConfiguration.MsSql2008.ConnectionString(connectionString)
                       )
-                      .Mappings(m =>
-                        m.FluentMappings.AddFromAssemblyOf<Database>())
+                      .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Database>())
+                      .ExposeConfiguration(cfg => new SchemaUpdate(cfg).Execute(false, true))
                       .BuildSessionFactory();
             }
         }
