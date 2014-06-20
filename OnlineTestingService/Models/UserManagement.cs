@@ -156,7 +156,7 @@ namespace OnlineTestingService.Models
                 out status);
             //string newPassword = newUser.ResetPassword();
             //send email with login and password.
-            //BusinessLogic.Mailer.Instance.SendCustomNotification(new BusinessLogic.Entities.EmailAddress(user.Email), "Dane do logowania", string.Format("Twój login: {0}. \n Twoje hasło: {1}", user.UserName, user.Password), null);
+            BusinessLogic.Mailer.Instance.SendCustomNotification(new BusinessLogic.Entities.EmailAddress(user.Email), "Dane do logowania", string.Format("Twój login: {0}. \n Twoje hasło: {1}", user.UserName, user.Password), null);
             AssignToRoles(user);
         }
 

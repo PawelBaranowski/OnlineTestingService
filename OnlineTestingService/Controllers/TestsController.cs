@@ -8,7 +8,7 @@ using OnlineTestingService.BusinessLogic;
 
 namespace OnlineTestingService.Controllers
 {
-    [Authorize]
+    [Authorize(Roles=Models.User.ADMIN + ", " + Models.User.CANDIDATE_MANAGER + ", " + Models.User.TEST_DEFINER + ", " + Models.User.TEST_REVIEWER)]
     public class TestsController : Controller
     {
         //

@@ -24,7 +24,8 @@
                         menu.Add().Text("Questions").Action("Index", "Questions");
                         menu.Add().Text("Test templates").Action("Index", "TestTemplates");
                         menu.Add().Text("Candidates").Action("Index", "Candidates");
-                        menu.Add().Text("Users and settings").Action("Index", "Admin");
+                        menu.Add().Text("Schedule").Action("Index", "Schedule");
+                        menu.Add().Text("Users and settings").Action("Index", "Admin").HtmlAttributes(new { style = "float:right;" });
                     }))
             
         </header>

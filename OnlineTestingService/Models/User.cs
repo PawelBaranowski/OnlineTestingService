@@ -15,11 +15,13 @@ namespace OnlineTestingService.Models
         public bool IsCandidateManager { get; set; }
         public bool IsTestDefiner { get; set; }
         public bool IsTestReviewer { get; set; }
+        public bool IsCandidate { get; set; }
 
         public const string ADMIN = "Admin";
         public const string CANDIDATE_MANAGER = "CandidateManager";
         public const string TEST_DEFINER = "TestDefiner";
         public const string TEST_REVIEWER = "TestReviewer";
+        public const string CANDIDATE = "Candidate";
 
         public User()
         {
@@ -69,6 +71,10 @@ namespace OnlineTestingService.Models
             {
                 roles.Add(TEST_REVIEWER);
             }
+            if (IsCandidate)
+            {
+                roles.Add(CANDIDATE);
+            }
             return roles.ToArray();
         }
 
@@ -89,6 +95,9 @@ namespace OnlineTestingService.Models
                         break;
                     case "TestReviewer":
                         IsTestReviewer = true;
+                        break;
+                    case CANDIDATE:
+                        IsCandidate = true;
                         break;
                     default:
                         break;

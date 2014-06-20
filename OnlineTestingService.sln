@@ -1,10 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTestingService", "OnlineTestingService\OnlineTestingService.csproj", "{80A33148-284D-4F74-97D1-8E931AF75270}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTestingServiceTests", "OnlineTestingServiceTests\OnlineTestingServiceTests.csproj", "{B13D84C7-155B-40D8-97FD-D6FC2D6E8470}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{04174231-BCBE-4159-8C17-5BAB50864100}"
 	ProjectSection(SolutionItems) = preProject
 		Local.testsettings = Local.testsettings
@@ -12,24 +8,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTestingService", "OnlineTestingService\OnlineTestingService.csproj", "{80A33148-284D-4F74-97D1-8E931AF75270}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTestingServiceTests", "OnlineTestingServiceTests\OnlineTestingServiceTests.csproj", "{B13D84C7-155B-40D8-97FD-D6FC2D6E8470}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineTestingService.BusinessLogic", "OnlineTestingService.BusinessLogic\OnlineTestingService.BusinessLogic.csproj", "{3CE29BF7-DAEE-4974-ADBF-840723D07F52}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 4
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://217.153.75.235:8080/tfs/impaq
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = OnlineTestingService\\OnlineTestingService.csproj
-		SccProjectName1 = OnlineTestingService
-		SccLocalPath1 = OnlineTestingService
-		SccProjectUniqueName2 = OnlineTestingServiceTests\\OnlineTestingServiceTests.csproj
-		SccProjectName2 = OnlineTestingServiceTests
-		SccLocalPath2 = OnlineTestingServiceTests
-		SccProjectUniqueName3 = OnlineTestingService.BusinessLogic\\OnlineTestingService.BusinessLogic.csproj
-		SccProjectName3 = OnlineTestingService.BusinessLogic
-		SccLocalPath3 = OnlineTestingService.BusinessLogic
-	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = OnlineTestingService.vsmdi
 	EndGlobalSection

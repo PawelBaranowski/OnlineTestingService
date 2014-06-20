@@ -21,6 +21,7 @@
         columns.Bound(u => u.IsCandidateManager);
         columns.Bound(u => u.IsTestDefiner);
         columns.Bound(u => u.IsTestReviewer);
+        columns.Bound(u => u.IsCandidate);
         columns.Command(commands =>
             {
                 commands.Edit().ButtonType(GridButtonType.ImageAndText);
