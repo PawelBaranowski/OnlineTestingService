@@ -49,8 +49,6 @@ namespace OnlineTestingService
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
-            AppDomain.CurrentDomain.SetData("DataDirectory", @"C:\Data\OnlineTestingService\");
-
             Setup();
         }
 
