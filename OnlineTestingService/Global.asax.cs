@@ -49,6 +49,8 @@ namespace OnlineTestingService
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
 
+            AppDomain.CurrentDomain.SetData("DataDirectory", @"C:\Data\OnlineTestingService\");
+
             Setup();
         }
 
@@ -64,8 +66,7 @@ namespace OnlineTestingService
             mailer.UrlPrefix = Settings.UrlPrefix;
             MailerDaemon.Start();
 
-            string connectionString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["ApplicationServices"].ToString();
-            Database.Setup(connectionString);
+            Database.Setup();
         }
     }
 }

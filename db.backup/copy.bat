@@ -1,4 +1,5 @@
 @echo off
-copy *.mdf ..\OnlineTestingService\App_Data\.
-copy *.ldf ..\OnlineTestingService\App_Data\.
+mkdir C:\Data\OnlineTestingService > nul
+copy *.mdf C:\Data\OnlineTestingService\.
+copy *.ldf C:\Data\OnlineTestingService\.
 pause
