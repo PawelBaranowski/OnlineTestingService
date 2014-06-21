@@ -30,6 +30,17 @@
                         .ImageHtmlAttributes(DetailsImage._)
                         .ButtonType(GridButtonType.ImageAndText);
                     });
+                    columns.Bound(candidate => candidate.User).Template(candidate =>
+                    {
+                        if (candidate.User == null)
+                        {
+                            return string.Format("<a href=\"{0}\" class=\"t-button t-grid-promote\">Promote to user</a>", Url.Action("Promote", "Candidates", new { id = candidate.Id }));
+                        }
+                        else
+                        {
+                            return string.Format("<a href=\"{0}\" class=\"t-button t-grid-profile\">Show profile</a>", Url.Action("Index", "Profile", new { id = candidate.Id }));
+                        }
+                    }).ReadOnly();
                 })
             .Scrollable(scrolling => scrolling.Enabled(true))
             .Sortable(sorting => sorting.Enabled(true))

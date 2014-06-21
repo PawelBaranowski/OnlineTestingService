@@ -17,6 +17,11 @@ namespace OnlineTestingService.BusinessLogic.Mappings
                 .Not.Nullable();
             References<File>(x => x.CV)
                 .Cascade.All();
+            References(x => x.User);
+
+            HasManyToMany(x => x.PerfectSkills).Access.Property().Cascade.SaveUpdate().Table("Candidate_PerfectSkills");
+            HasManyToMany(x => x.GoodSkills).Access.Property().Cascade.SaveUpdate().Table("Candidate_GoodSkills");
+            HasManyToMany(x => x.BasicSkills).Access.Property().Cascade.SaveUpdate().Table("Candidate_BasicSkills");
         }
     }
 }

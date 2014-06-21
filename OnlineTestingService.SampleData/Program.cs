@@ -352,6 +352,13 @@ namespace OnlineTestingService.SampleData
             test2.FinishReview();
             Instance.Save(test2);
             #endregion
+            #region Skills
+            var skills = new[] { "C#", "Java", "C++", "PHP", "JavaScript", "Node", "Ruby on rails" };
+            foreach (var skill in skills)
+            {
+                Database.Instance.MakeNew<Skill>(skill);
+            }
+            #endregion
         }
     }
 }

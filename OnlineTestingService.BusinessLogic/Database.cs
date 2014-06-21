@@ -52,6 +52,8 @@ namespace OnlineTestingService.BusinessLogic
                     entity = new QuestionGroup(nameOrContent);
                 else if (type.Equals(typeof(TestTemplate)))
                     entity = new TestTemplate(nameOrContent);
+                else if (type.Equals(typeof(Skill)))
+                    entity = new Skill { Name = nameOrContent };
                 else
                     throw new NotImplementedException("Creation of '" + type.FullName + "' objects is not supported!\nPerhaps its a new feature that needs to be implemented?");
                 session.Save(entity);

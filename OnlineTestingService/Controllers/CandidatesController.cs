@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using OnlineTestingService.BusinessLogic.Entities;
 using OnlineTestingService.BusinessLogic;
 using System.Reflection;
+using System.Web.Security;
+using OnlineTestingService.Models;
 
 namespace OnlineTestingService.Controllers
 {
@@ -132,6 +134,29 @@ namespace OnlineTestingService.Controllers
                 candidate.CV = null;
                 Database.Instance.Delete(file);
             }
+        }
+
+        public ActionResult Promote(int id)
+        {
+            var userId = Guid.NewGuid();
+            var status = new MembershipCreateStatus();
+            
+            var candidate = Database.Instance.GetById<Candidate>(id);
+            
+            var user = new Models.User();
+            user.UserID = userId;
+            user.UserName = candidate.EmailAddress.Address;
+            user.Email = candidate.EmailAddress.Address;
+            user.IsCandidate = true;
+
+            UserManagement.GetInstance().AddUser(user, out status);
+            if (status == MembershipCreateStatus.Success)
+            {
+                candidate.User = Database.Instance.GetByGuid<OnlineTestingService.BusinessLogic.Entities.User>(userId);
+                Database.Instance.Save(candidate);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

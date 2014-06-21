@@ -10,6 +10,6 @@ namespace OnlineTestingService.BusinessLogic.Entities
     /// </summary>
     public abstract class EntityWithGuid : Entity
     {
-        public virtual Guid Guid { get; private set; }
+        public virtual Guid Guid { get; set; }
     }
 }

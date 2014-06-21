@@ -94,8 +94,10 @@
     <Compile Include="Entities\Question.cs" />
     <Compile Include="Entities\QuestionContent.cs" />
     <Compile Include="Entities\QuestionGroup.cs" />
+    <Compile Include="Entities\Skill.cs" />
     <Compile Include="Entities\Test.cs" />
     <Compile Include="Entities\TestTemplate.cs" />
+    <Compile Include="Entities\User.cs" />
     <Compile Include="Mappings\AnswerMap.cs" />
     <Compile Include="Mappings\CandidateMap.cs" />
     <Compile Include="Mappings\EmailAddressMap.cs" />
@@ -105,10 +107,12 @@
     <Compile Include="Mappings\QuestionContentMap.cs" />
     <Compile Include="Mappings\QuestionGroupMap.cs" />
     <Compile Include="Mappings\QuestionMap.cs" />
+    <Compile Include="Mappings\SkillMap.cs" />
     <Compile Include="Mappings\TestMap.cs" />
     <Compile Include="Mappings\TestTemplateMap.cs" />
     <Compile Include="GUIDGenerator.cs" />
     <Compile Include="Mailer.cs" />
+    <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Notification.cs" />
     <Compile Include="PasswordGenerator.cs" />
     <Compile Include="TestGenerator.cs" />

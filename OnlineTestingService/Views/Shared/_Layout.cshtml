@@ -29,6 +29,8 @@
                         menu.Add().Text("Test templates").Action("Index", "TestTemplates");
                         menu.Add().Text("Candidates").Action("Index", "Candidates");
                         menu.Add().Text("Schedule").Action("Index", "Schedule");
+                        if (HttpContext.Current.User.IsInRole(OnlineTestingService.Models.User.CANDIDATE))
+                            menu.Add().Text("Profile").Action("Index", "Profile");
                         menu.Add().Text("Users and settings").Action("Index", "Admin").HtmlAttributes(new { style = "float:right;" });
                     }))
             

@@ -1,0 +1,50 @@
+﻿@model OnlineTestingService.Models.CandidateProfileViewModel
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    Func<string, object> skillsOptions = @<text><select name="@(item)" data-role="multiselect" data-placeholder="Type and select skills..." data-bind="value: @(item), source: skillsOptions" data-value-primitive="true" data-value-field="Id" data-text-field="Name" ></select></text>;
+    var userIsCandidate = HttpContext.Current.User.IsInRole(OnlineTestingService.Models.User.CANDIDATE);
+}
+<h2>@ViewBag.Title</h2>
+@using (userIsCandidate ? Html.BeginForm("SaveProfile", "Profile") : Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.Id)
+    <h3>Tell us about your skills</h3>
+    <p>I'm perfect at:</p>
+    @skillsOptions("perfectSkills")
+    <p>I'm preety good at:</p>
+    @skillsOptions("goodSkills")
+    <p>I have basic understanding of:</p>
+    @skillsOptions("basicSkills")
+    <br />
+    if (userIsCandidate)
+    {
+    <input type="submit" class="k-button" value="Save" /> 
+    }
+}
+
+<script type="text/javascript">
+    (function ($) {
+        $(function () {
+            var viewModel = kendo.observable({
+                perfectSkills: @Json.Encode(Model.PerfectSkills),
+                goodSkills: @Json.Encode(Model.GoodSkills),
+                basicSkills: @Json.Encode(Model.BasicSkills),
+                skillsOptions: new kendo.data.DataSource({
+                    transport: {
+                        read: {
+                            url: "@Url.Action("Skills", "Profile")",
+                            dataType: "json"
+                        }
+                    }
+                })
+            });
+
+            kendo.bind(document.body, viewModel);
+
+            window.viewModel = viewModel;
+        });
+    })(kendo.jQuery);
+</script>

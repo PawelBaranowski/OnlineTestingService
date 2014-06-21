@@ -38,6 +38,11 @@ namespace OnlineTestingService.Controllers
                     }
                     else
                     {
+                        if (Roles.Provider.IsUserInRole(model.UserName, Models.User.CANDIDATE))
+                        {
+                            return RedirectToAction("Index", "Profile");
+                        }
+                        
                         return RedirectToAction("Index", "Tests");
                     }
                 }
