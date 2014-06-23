@@ -8,7 +8,7 @@ namespace OnlineTestingService.BusinessLogic.Entities
     /// <summary>
     /// A definition of a test.
     /// </summary>
-    public class TestTemplate : EntityWithId, EntityWithText
+    public class TestTemplate : EntityWithId<TestTemplate>, EntityWithText
     {
         private const char SEPARATOR = ';';
 

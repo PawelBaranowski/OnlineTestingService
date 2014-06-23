@@ -7,7 +7,7 @@ namespace OnlineTestingService.BusinessLogic.Entities
     /// <summary>
     /// Objects of this class represent a concrete test with all <see cref="Question"/>s and candidate's info.
     /// </summary>
-    public class Test : EntityWithGuid
+    public class Test : EntityWithGuid<Test>
     {
         public enum TestStatus
         {
@@ -164,7 +164,7 @@ namespace OnlineTestingService.BusinessLogic.Entities
         /// <summary>
         /// Initializes empty Test.
         /// </summary>
-        protected Test()
+        public Test()
         {
         }
 

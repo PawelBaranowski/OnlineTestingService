@@ -6,7 +6,7 @@ namespace OnlineTestingService.BusinessLogic.Entities
     /// <summary>
     /// This class provides an abstract represantation of a file stored in database.
     /// </summary>
-    public class File : EntityWithId, CanDelete
+    public class File : EntityWithId<File>, CanDelete
     {
         private string name;
         private byte[] content;

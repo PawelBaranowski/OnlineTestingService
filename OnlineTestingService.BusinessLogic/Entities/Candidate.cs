@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OnlineTestingService.BusinessLogic.Entities
 {
-    public class Candidate : EntityWithId, EntityWithText
+    public class Candidate : EntityWithId<Candidate>, EntityWithText
     {
         virtual public File CV { get; set; }
         virtual public EmailAddress EmailAddress { get; set; }

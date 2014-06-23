@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OnlineTestingService.BusinessLogic.Entities
 {
-    public class Skill : EntityWithId, EntityWithText
+    public class Skill : EntityWithId<Skill>, EntityWithText
     {
         public virtual string Name { get; set; }
     }

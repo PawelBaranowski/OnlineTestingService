@@ -31,6 +31,17 @@ namespace OnlineTestingService.BusinessLogic
         }
 
         #region Methods that create new business objects
+        public T MakeNew<T>(T entity = null) where T : Entity<T>, new()
+        {
+            using (var session = sessionFactory.OpenSession())
+            using (var transaction = session.BeginTransaction())
+            {
+                entity = entity ?? new T();
+                session.Save(entity);
+                transaction.Commit();
+                return (T)entity;
+            }
+        }
         /// <summary>
         /// Creates new objects that can be constructed using one string parameter.
         /// </summary>
@@ -104,7 +115,7 @@ namespace OnlineTestingService.BusinessLogic
         /// Persists changes made in a business object.
         /// </summary>
         /// <param name="businessObject">business object whose state needs to be persisted</param>
-        public void Save(Entity businessObject)
+        public void Save<T>(Entity<T> businessObject) where T : Entity<T>, new()
         {
             using (var transaction = getSaveSession.BeginTransaction())
             {
@@ -130,12 +141,12 @@ namespace OnlineTestingService.BusinessLogic
         /// </summary>
         /// <typeparam name="T">type of objects to find</typeparam>
         /// <returns>a list of all persistent objects of type T</returns>
-        public IList<T> GetAllOfType<T>() where T : Entity
+        public IList<T> GetAllOfType<T>() where T : Entity<T>, new()
         {
             return getSaveSession.CreateCriteria<T>().List<T>();
         }
 
-        public IList<T> GetAllOfType<T>(Expression<Func<T, bool>> expression) where T : Entity
+        public IList<T> GetAllOfType<T>(Expression<Func<T, bool>> expression) where T : Entity<T>, new()
         {
             return (IList<T>)getSaveSession.QueryOver<T>().Where(expression).List();
         }
@@ -147,7 +158,7 @@ namespace OnlineTestingService.BusinessLogic
         /// <typeparam name="T">type of object to get</typeparam>
         /// <param name="id">object's id</param>
         /// <returns>the persistent object or null</returns>
-        public T GetById<T>(int id) where T : EntityWithId
+        public T GetById<T>(int id) where T : EntityWithId<T>, new()
         {
             return getSaveSession.Get<T>(id);
         }
@@ -158,7 +169,7 @@ namespace OnlineTestingService.BusinessLogic
         /// <typeparam name="T">type of object to get</typeparam>
         /// <param name="guid">object's Guid</param>
         /// <returns>the persistent object or null</returns>
-        public T GetByGuid<T>(Guid guid) where T : EntityWithGuid
+        public T GetByGuid<T>(Guid guid) where T : EntityWithGuid<T>, new()
         {
             return getSaveSession.Get<T>(guid);
         }

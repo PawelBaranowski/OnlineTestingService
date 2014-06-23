@@ -11,7 +11,7 @@ namespace OnlineTestingService.BusinessLogic.Entities
     /// The group can contain any number of questions.
     /// A question may belong to one or more question groups.
     /// </summary>
-    public class QuestionGroup : EntityWithId, EntityWithText, CanDelete
+    public class QuestionGroup : EntityWithId<QuestionGroup>, EntityWithText, CanDelete
     {
         public static readonly QuestionGroup NO_GROUP = new QuestionGroup { Name = "<not grouped>" };
 

@@ -9,7 +9,7 @@ namespace OnlineTestingService.BusinessLogic.Entities
     /// It says how many questions are to be drawn from a group.
     /// </summary>
     [DisplayName("Number of questions")]
-    public class GroupAndNumber : EntityWithId
+    public class GroupAndNumber : EntityWithId<GroupAndNumber>
     {
         /// <summary>
         /// Gets the question group.

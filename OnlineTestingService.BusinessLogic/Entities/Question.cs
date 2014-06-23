@@ -5,7 +5,7 @@ namespace OnlineTestingService.BusinessLogic.Entities
     /// <summary>
     /// Objects of this class represent a unique question that holds an answer.
     /// </summary>
-    public class Question : EntityWithId
+    public class Question : EntityWithId<Question>
     {
         private QuestionContent questionContent;
         private Answer answer;
@@ -28,7 +28,7 @@ namespace OnlineTestingService.BusinessLogic.Entities
             set { this.answer = value; }
         }
 
-        protected Question()
+        public Question()
         {
         }
 

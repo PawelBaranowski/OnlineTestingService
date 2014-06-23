@@ -9,7 +9,7 @@ namespace OnlineTestingService.BusinessLogic.Entities
     /// <summary>
     /// Objects of this class store a question and all its properties.
     /// </summary>
-    public class QuestionContent : EntityWithId, EntityWithText
+    public class QuestionContent : EntityWithId<QuestionContent>, EntityWithText
     {
         private IList<QuestionGroup> inGroups;
 
