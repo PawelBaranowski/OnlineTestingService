@@ -11,19 +11,18 @@ using OnlineTestingService.Models;
 namespace OnlineTestingService.Controllers
 {
     [Authorize]
-    public class ProfileController : Controller
+    public class ProfileController : BaseController
     {
         public ActionResult Index(int? id)
         {
             Candidate candidate;
             if (id == null)
             {
-                var user = GetUser();
-                candidate = user.Candidate;
+                candidate = CurrentCandidate;
             }
             else
             {
-                candidate = Database.Instance.GetById<Candidate>(id.Value);
+                candidate = Database.GetById<Candidate>(id.Value);
             }
 
             var model = new CandidateProfileViewModel();
@@ -35,7 +34,7 @@ namespace OnlineTestingService.Controllers
 
         public ActionResult Skills()
         {
-            var skills = Database.Instance.GetAllOfType<Skill>();
+            var skills = Database.GetAllOfType<Skill>();
 
             return Json(skills, JsonRequestBehavior.AllowGet);
         }
@@ -43,22 +42,15 @@ namespace OnlineTestingService.Controllers
         [HttpPost]
         public ActionResult SaveProfile(CandidateProfileViewModel model)
         {
-            var user = GetUser();
-            var candidate = user.Candidate;
-            var skills = Database.Instance.GetAllOfType<Skill>();
+            var candidate = CurrentCandidate;
+            var skills = Database.GetAllOfType<Skill>();
 
             candidate.PerfectSkills = skills.Where(skill => model.PerfectSkills.Contains(skill.Id)).ToList();
             candidate.GoodSkills = skills.Where(skill => model.GoodSkills.Contains(skill.Id)).ToList();
             candidate.BasicSkills = skills.Where(skill => model.BasicSkills.Contains(skill.Id)).ToList();
-            Database.Instance.Save(candidate);
+            Database.Save(candidate);
 
             return RedirectToAction("Index");
-        }
-
-        private OnlineTestingService.BusinessLogic.Entities.User GetUser()
-        {
-            var userId = (Guid)System.Web.Security.Membership.GetUser().ProviderUserKey;
-            return Database.Instance.GetByGuid<OnlineTestingService.BusinessLogic.Entities.User>(userId);
         }
     }
 }

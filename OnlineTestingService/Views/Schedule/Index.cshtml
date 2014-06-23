@@ -1,0 +1,14 @@
+﻿@model List<ScheduleItem>
+@{
+    ViewBag.Title = "Schedule";
+}
+<h2>Your scheduled meetings</h2>
+@(Html.Telerik().Grid(Model)
+.Name("ScheduleItems")
+.Columns(c =>
+{
+    c.Bound(m => m.Date);
+    c.Bound(m => m.Candidate).Template(m => Html.ActionLink(m.Candidate.Name, "Index", "Profile", new { id = m.Candidate.Id }, null));
+    c.Bound(m => m.Test).Template(m => Html.ActionLink(string.Format("Status: {0}, Grade: {1}", m.Test.Status, m.Test.Grade >= 0 ? m.Test.Grade.ToString() : "?"), "Review", "Tests", new { id = m.Test.Guid }, null)).Title("Test");
+    c.Bound(m => m.Description);
+}))

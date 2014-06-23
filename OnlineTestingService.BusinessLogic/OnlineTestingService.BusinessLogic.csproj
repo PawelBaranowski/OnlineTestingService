@@ -94,6 +94,7 @@
     <Compile Include="Entities\Question.cs" />
     <Compile Include="Entities\QuestionContent.cs" />
     <Compile Include="Entities\QuestionGroup.cs" />
+    <Compile Include="Entities\ScheduleItem.cs" />
     <Compile Include="Entities\Skill.cs" />
     <Compile Include="Entities\Test.cs" />
     <Compile Include="Entities\TestTemplate.cs" />
@@ -107,6 +108,7 @@
     <Compile Include="Mappings\QuestionContentMap.cs" />
     <Compile Include="Mappings\QuestionGroupMap.cs" />
     <Compile Include="Mappings\QuestionMap.cs" />
+    <Compile Include="Mappings\ScheduleItemMap.cs" />
     <Compile Include="Mappings\SkillMap.cs" />
     <Compile Include="Mappings\TestMap.cs" />
     <Compile Include="Mappings\TestTemplateMap.cs" />

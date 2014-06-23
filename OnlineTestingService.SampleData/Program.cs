@@ -352,6 +352,16 @@ namespace OnlineTestingService.SampleData
             test2.FinishReview();
             Instance.Save(test2);
             #endregion
+            #region Sheduled meetings
+            var sheduleItem = Instance.MakeNew(new ScheduleItem
+            {
+                Date = DateTime.Today.AddDays(7),
+                Candidate = candidate1,
+                Host = Instance.GetAllOfType<User>().First(x => x.Name == "candidateM"),
+                Test = test1,
+                Description = "Possible technical lead for the dev team"
+            });
+            #endregion
             #region Skills
             var skills = new[] { "C#", "Java", "C++", "PHP", "JavaScript", "Node", "Ruby on rails" };
             foreach (var skill in skills)

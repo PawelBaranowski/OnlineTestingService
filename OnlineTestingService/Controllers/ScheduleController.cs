@@ -10,11 +10,12 @@ using System.Reflection;
 namespace OnlineTestingService.Controllers
 {
     [Authorize(Roles=Models.User.CANDIDATE_MANAGER + "," + Models.User.ADMIN)]
-    public class ScheduleController : Controller
+    public class ScheduleController : BaseController
     {
         public ActionResult Index()
         {
-            return View();
+            var items = Database.GetAllOfType<ScheduleItem>().Where(x => x.Host.Guid == CurrentUser.Guid).ToList();
+            return View(items);
         }
     }
 }
