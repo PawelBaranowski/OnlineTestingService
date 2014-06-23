@@ -55,6 +55,12 @@
                             else return "";
                         }
                     ).Title("");
+        columns.Bound(t => t.Guid).Template(
+                        test =>
+                        {
+                            return "<a href=\"" + Url.Action("Invite", "Candidates", new { id = Model.Id, testId = test.Guid }) + "\" class=\"t-button\">Invite to a meeting</a>";
+                        }
+                    ).Title("");
     }
         )
         )

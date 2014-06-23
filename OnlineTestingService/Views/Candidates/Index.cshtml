@@ -30,7 +30,7 @@
                         .ImageHtmlAttributes(DetailsImage._)
                         .ButtonType(GridButtonType.ImageAndText);
                     });
-                    columns.Bound(candidate => candidate.User).Template(candidate =>
+                    columns.Bound(candidate => candidate.User).Title(string.Empty).Template(candidate =>
                     {
                         if (candidate.User == null)
                         {

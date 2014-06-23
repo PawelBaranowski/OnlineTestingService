@@ -284,10 +284,12 @@
     <Compile Include="MailerDaemon.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\CandidateProfileViewModel.cs" />
+    <Compile Include="Models\InviteCandidateViewModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserManagement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings.cs" />
+    <Content Include="Views\Candidates\Invite.cshtml" />
     <None Include="Views\Schedule\Index.cshtml" />
     <Content Include="Content\kendo\2014.1.318\Black\editor.png" />
     <Content Include="Content\kendo\2014.1.318\Black\imagebrowser.png" />

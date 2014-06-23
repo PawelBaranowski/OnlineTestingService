@@ -12,14 +12,14 @@ using OnlineTestingService.Models;
 namespace OnlineTestingService.Controllers
 {
     [Authorize(Roles=Models.User.CANDIDATE_MANAGER + "," + Models.User.ADMIN)]
-    public class CandidatesController : Controller
+    public class CandidatesController : BaseController
     {
         //
         // GET: /Candidates/
 
         public ActionResult Index()
         {
-            return View(Database.Instance.GetAllOfType<Candidate>(c => c.Inactive == false));
+            return View(Database.GetAllOfType<Candidate>(c => c.Inactive == false));
         }
 
         public ActionResult SelectCandidate(int? id)
@@ -28,18 +28,18 @@ namespace OnlineTestingService.Controllers
             {
                 ViewData["id"] = (int)id;
             }
-            ViewData["Candidates"] = Database.Instance.GetAllOfType<Candidate>();
-            return View("Index", Database.Instance.GetAllOfType<Candidate>());
+            ViewData["Candidates"] = Database.GetAllOfType<Candidate>();
+            return View("Index", Database.GetAllOfType<Candidate>());
         }
 
         public ActionResult SelectSingleCandidate(int? candidateId)
         {
             if (candidateId == null)
             {
-                return View("Index", Database.Instance.GetAllOfType<Candidate>()); 
+                return View("Index", Database.GetAllOfType<Candidate>()); 
             }
-            ViewData["testTemplates"] = Database.Instance.GetAllOfType<TestTemplate>();
-            return View("Details", Database.Instance.GetById<Candidate>((int)candidateId));
+            ViewData["testTemplates"] = Database.GetAllOfType<TestTemplate>();
+            return View("Details", Database.GetById<Candidate>((int)candidateId));
         }
 
         public ActionResult InsertCandidate(Candidate instertedCandidate)
@@ -48,16 +48,16 @@ namespace OnlineTestingService.Controllers
             {
                 return RedirectToAction("Index");
             }
-            Candidate newCandidate = Database.Instance.MakeNew<Candidate>(instertedCandidate.Name);
+            Candidate newCandidate = Database.MakeNew<Candidate>(instertedCandidate.Name);
             Update(newCandidate, instertedCandidate, false);
             ViewData["id"] = newCandidate.Id;
-            ViewData["testTemplates"] = Database.Instance.GetAllOfType<TestTemplate>();
+            ViewData["testTemplates"] = Database.GetAllOfType<TestTemplate>();
             return View("Details", newCandidate);
         }
 
         public ActionResult UpdateCandidate(int id, Candidate candidate, bool? removeOldFile)
         {
-            Candidate toUpdate = Database.Instance.GetById<Candidate>(id);
+            Candidate toUpdate = Database.GetById<Candidate>(id);
             if (toUpdate == null) return RedirectToAction("Index");
             Update(toUpdate, candidate, removeOldFile ?? false);
             return RedirectToAction("Index");
@@ -65,7 +65,7 @@ namespace OnlineTestingService.Controllers
 
         public ActionResult UpdateSingleCandidate(int candidateId, Candidate candidate, bool? removeOldFile)
         {
-            Candidate toUpdate = Database.Instance.GetById<Candidate>(candidateId);
+            Candidate toUpdate = Database.GetById<Candidate>(candidateId);
             if (toUpdate == null) return RedirectToAction("Index");
             Update(toUpdate, candidate, removeOldFile ?? false);
             return RedirectToAction("Details", toUpdate);
@@ -85,9 +85,9 @@ namespace OnlineTestingService.Controllers
             }
             if (cvFile != null && cvFile.ContentLength > 0)
             {
-                old.CV = Database.Instance.MakeNew<File>(cvFile);
+                old.CV = Database.MakeNew<File>(cvFile);
             }
-            Database.Instance.Save(old);
+            Database.Save(old);
         }
 
         public ActionResult AssingToTemplate(int? id, int? templatesToChoseId)
@@ -98,11 +98,11 @@ namespace OnlineTestingService.Controllers
             }
             else
             {
-                if (!Database.Instance.GetById<Candidate>((int)id).Inactive)
+                if (!Database.GetById<Candidate>((int)id).Inactive)
                 {
-                    TestTemplate template = Database.Instance.GetById<TestTemplate>((int)templatesToChoseId);
-                    Candidate candidate = Database.Instance.GetById<Candidate>((int)id);
-                    Database.Instance.MakeNew<Test>(template, candidate);
+                    TestTemplate template = Database.GetById<TestTemplate>((int)templatesToChoseId);
+                    Candidate candidate = Database.GetById<Candidate>((int)id);
+                    Database.MakeNew<Test>(template, candidate);
                 }
                 return RedirectToAction("Details", new { id = (int)id });
             }
@@ -112,7 +112,7 @@ namespace OnlineTestingService.Controllers
         {
             if (id == null)
             {
-                return RedirectToAction("Index", Database.Instance.GetAllOfType<Candidate>());
+                return RedirectToAction("Index", Database.GetAllOfType<Candidate>());
             }
             else
             {
@@ -120,9 +120,9 @@ namespace OnlineTestingService.Controllers
                 //IList<QuestionGroup> allGroups = Database.Instance.GetAllOfType<QuestionGroup>();
                 //ViewData["groupsToAdd"] = allGroups.Except(content.InGroups);
                 ViewData["id"] = id;
-                ViewData["testTemplates"] = Database.Instance.GetAllOfType<TestTemplate>();
-                ViewData["tests"] = Database.Instance.GetAllOfType<Test>(t => t.Candidate.Id == (int)id);
-                return View(Database.Instance.GetById<Candidate>((int)id));
+                ViewData["testTemplates"] = Database.GetAllOfType<TestTemplate>();
+                ViewData["tests"] = Database.GetAllOfType<Test>(t => t.Candidate.Id == (int)id);
+                return View(Database.GetById<Candidate>((int)id));
             }
         }
 
@@ -132,7 +132,7 @@ namespace OnlineTestingService.Controllers
             if (file != null)
             {
                 candidate.CV = null;
-                Database.Instance.Delete(file);
+                Database.Delete(file);
             }
         }
 
@@ -141,7 +141,7 @@ namespace OnlineTestingService.Controllers
             var userId = Guid.NewGuid();
             var status = new MembershipCreateStatus();
             
-            var candidate = Database.Instance.GetById<Candidate>(id);
+            var candidate = Database.GetById<Candidate>(id);
             
             var user = new Models.User();
             user.UserID = userId;
@@ -152,11 +152,46 @@ namespace OnlineTestingService.Controllers
             UserManagement.GetInstance().AddUser(user, out status);
             if (status == MembershipCreateStatus.Success)
             {
-                candidate.User = Database.Instance.GetByGuid<OnlineTestingService.BusinessLogic.Entities.User>(userId);
-                Database.Instance.Save(candidate);
+                candidate.User = Database.GetByGuid<OnlineTestingService.BusinessLogic.Entities.User>(userId);
+                Database.Save(candidate);
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [ActionName("Invite")]
+        public ActionResult Invite_GET(int id, Guid testId)
+        {
+            var candidate = Database.GetById<Candidate>(id);
+
+            var model = new InviteCandidateViewModel
+            {
+                CandidateId = id,
+                CandidateName = candidate.Name,
+                TestId = testId,
+                Date = DateTime.Now
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ActionName("Invite")]
+        public ActionResult Invite_POST(InviteCandidateViewModel model)
+        {
+            var scheduleItem = new ScheduleItem
+            {
+                Candidate = Database.GetById<Candidate>(model.CandidateId),
+                Test = Database.GetByGuid<Test>(model.TestId),
+                Host = CurrentUser,
+                Date = model.Date,
+                Description = model.Description
+            };
+
+            Database.MakeNew(scheduleItem);
+
+            return RedirectToAction("Details", new { id = model.CandidateId });
         }
     }
 }

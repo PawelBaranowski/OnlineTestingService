@@ -1,0 +1,13 @@
+﻿@model OnlineTestingService.Models.InviteCandidateViewModel
+@{
+    ViewBag.Title = "Invite candidate to a meeting";
+}
+@using (Html.BeginForm("Invite", "Candidates", FormMethod.Post))
+{
+@Html.HiddenFor(m => m.TestId)
+@Html.HiddenFor(m => m.CandidateId)
+<div><strong>Candidate: </strong>@Model.CandidateName</div>
+<div><strong>Date: </strong>@Html.Telerik().DateTimePickerFor(m => m.Date)</div>
+<div><strong>Description: </strong>@Html.TextAreaFor(m => m.Description)</div>
+<input type="submit" class="t-button" value="Invite" />
+}
