@@ -1,6 +1,9 @@
 OnlineTestingService
 ====================
 
+
+
+
 *Project Scope*
 
 The project is meant to provide a web interface for defining and performing online test for job candidates. Questions are open (the application does not support multiple choices) and answers are verified by a company’s employee. The candidate has limited time for each question (default is 5 minutes and this value can be changed while defining a question).
@@ -9,9 +12,14 @@ In more detail the project is going to include:
 -> A website for candidates applying for a job. It allows them to fill the test (answer the questions). The test has time limitations. User has possibility to skip back and forward between questions.
 -> Website application for company’s employees. It allows adding new candidates, creating questions, test templates, reviewing answers and grading them. Also some basic user management system is available. 
 
+
+
+
 *Objective*
 
 Performing online tests. Questions are open (the application does not support multiple choices) and answers are verified by a company’s employee. The candidate has limited time for each 2question (default is 5 minutes and this value can be changed while defining a question).
+
+
 
 
 *Technology*:
@@ -19,6 +27,9 @@ Performing online tests. Questions are open (the application does not support mu
 ASP.NET MVC 3
 SQL Server 2008
 NHibernate
+
+
+
 
 *Requirements*
 
@@ -54,6 +65,7 @@ NHibernate
 
 
 
+
 *Actors and their goals*
 
 - Candidate: Fills the test. They get a link to a test and a password and can fill the test at any time. It is allowed to close the browser window and open the test again. If there is still some time left they can continue filling the test.
@@ -61,6 +73,8 @@ NHibernate
 - Candidate manager: Assigns a test template to a particular candidate and adds new candidates to database.
 - Test reviewer: Reviews, comments and grades answers.
 - Admin: Creates new users and assigns roles to them, changes roles of existing users. Admin role includes all other roles.
+
+
 
 
 *Limitations*
