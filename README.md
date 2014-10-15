@@ -10,15 +10,18 @@ In more detail the project is going to include:
 -> Website application for company’s employees. It allows adding new candidates, creating questions, test templates, reviewing answers and grading them. Also some basic user management system is available. 
 
 *Objective*
+
 Performing online tests. Questions are open (the application does not support multiple choices) and answers are verified by a company’s employee. The candidate has limited time for each 2question (default is 5 minutes and this value can be changed while defining a question).
 
 
 *Technology*:
+
 ASP.NET MVC 3
 SQL Server 2008
 NHibernate
 
 *Requirements*
+
 - Adding candidates to the database
 - Data stored: first name, last name, e-mail address, phone number, CV.
 - Defining groups (categories) of questions
@@ -52,6 +55,7 @@ NHibernate
 
 
 *Actors and their goals*
+
 - Candidate: Fills the test. They get a link to a test and a password and can fill the test at any time. It is allowed to close the browser window and open the test again. If there is still some time left they can continue filling the test.
 - Test definer: Defines question groups, questions and test templates. Assigns questions to specific groups (one question can belong to several groups).
 - Candidate manager: Assigns a test template to a particular candidate and adds new candidates to database.
@@ -60,6 +64,7 @@ NHibernate
 
 
 *Limitations*
+
 -> Both web sites must work properly in major modern web browsers.
 ->The answers must be saved frequently to avoid loss of candidate’s work.
 ->The testing system must instantly respond to actions.
