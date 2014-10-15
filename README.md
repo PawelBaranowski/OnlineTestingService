@@ -79,8 +79,8 @@ NHibernate
 
 *Limitations*
 
--> Both web sites must work properly in major modern web browsers.
-->The answers must be saved frequently to avoid loss of candidate’s work.
-->The testing system must instantly respond to actions.
+- Both web sites must work properly in major modern web browsers.
+- The answers must be saved frequently to avoid loss of candidate’s work.
+- The testing system must instantly respond to actions.
 
 
